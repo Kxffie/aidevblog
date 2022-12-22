@@ -8,7 +8,7 @@ import ScrollToTopButton from '../components/ScrollToTopButton';
 const Layout = ({ children }) => (
   <div className='flex flex-col justify-between h-screen'>
     <Header />
-    <div className='mb-auto '>{children}</div>
+    <div className='mb-auto'>{children}</div>
     <Footer />
   </div>
 )
