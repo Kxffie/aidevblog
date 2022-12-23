@@ -10,9 +10,6 @@ const Header = () => (
 					<a className="pl-3 text-2xl font-bold tracking-tight text-white transition duration-150 ease-in-out hover:underline">AIDevBlog</a>
 				</Link>
 			</div>
-			{/* <Link legacyBehavior href="/about" >
-				<a className="pr-3 text-lg font-bold tracking-tight text-white transition duration-150 ease-in-out hover:underline">About</a>
-			</Link> */}
 			{/* <div className="flex items-center">
 				<Link href="/login" className='text-white'>Sign In</Link>
 			</div> */}
