@@ -41,10 +41,12 @@ const Index = (props) => {
     const endIndex = startIndex + itemsPerPage;
     const currentPagePosts = filteredPosts.slice(startIndex, endIndex);
 
+    const title = `AIDevBlog - Page ${page}`;
+
     return (
       <div>
         <Head>
-          <title>AIDevBlog - Page {page}</title>
+          <title>{title}</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta content="AIDevBlog" property="og:title" />
           <meta content="Our blog covers the latest trends and developments in coding and AI. From programming languages to machine learning, we share insights and experiences on a wide range of topics. Whether you're a seasoned developer or just starting out, we hope you'll find our blog a valuable resource." property="og:description" />
@@ -79,24 +81,25 @@ const Index = (props) => {
             </div>
           </div >
         ))}
+
         <div className="flex justify-between mx-2 mt-6">
           <div>
             {/* First Page */}
-            <button onClick={() => setPage(1)} disabled={page === 1} className='px-2 py-1 mr-3 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500 disabled:bg-gray-300 disabled:text-gray-400'>
+            <button onClick={() => setPage(1)} disabled={page === 1} className='px-2 py-1 mr-3 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500 disabled:bg-gray-300 disabled:text-gray-400 tooltip' data-tip="First Page">
               <FiChevronsLeft size={36} />
             </button>
             {/* Last Page */}
-            <button onClick={() => setPage(page - 1)} disabled={page === 1} className='px-2 py-1 mr-3 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500 disabled:bg-gray-300 disabled:text-gray-400'>
+            <button onClick={() => setPage(page - 1)} disabled={page === 1} className='px-2 py-1 mr-3 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500 disabled:bg-gray-300 disabled:text-gray-400 tooltip' data-tip="Previous Page">
               <FiChevronLeft size={36} />
             </button>
           </div>
           <div>
             {/* Next Page */}
-            <button onClick={() => setPage(page + 1)} disabled={page * itemsPerPage >= filteredPosts.length} className='px-2 py-1 ml-3 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500 disabled:bg-gray-300 disabled:text-gray-400'>
+            <button onClick={() => setPage(page + 1)} disabled={page * itemsPerPage >= filteredPosts.length} className='px-2 py-1 ml-3 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500 disabled:bg-gray-300 disabled:text-gray-400 tooltip' data-tip="Next Page">
               <FiChevronRight size={36} />
             </button>
             {/* Last Page */}
-            <button onClick={() => setPage(Math.ceil(filteredPosts.length / itemsPerPage))} disabled={page * itemsPerPage >= filteredPosts.length} className='px-2 py-1 ml-3 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500 disabled:bg-gray-300 disabled:text-gray-400'>
+            <button onClick={() => setPage(Math.ceil(filteredPosts.length / itemsPerPage))} disabled={page * itemsPerPage >= filteredPosts.length} className='px-2 py-1 ml-3 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500 disabled:bg-gray-300 disabled:text-gray-400 tooltip' data-tip="Last Page">
               <FiChevronsRight size={36} />
             </button>
           </div>
@@ -118,8 +121,8 @@ const Index = (props) => {
       <br />
       <div className="flex">
         <input type="text" placeholder="Search tags..." value={searchQuery} onChange={handleSearchInput} className="flex-grow h-10 px-5 pr-16 text-sm bg-white border-2 border-gray-300 rounded-lg focus:border-violet-500 focus:outline-none" />
-        <button className='px-2 py-1 ml-2 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500' onClick={handleSearchSubmit}><FiSearch size={30} /></button>
-        <button className='px-2 py-1 ml-2 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500' onClick={goToRandomPost}><GiPerspectiveDiceSixFacesRandom size={30} /></button>
+        <button className='px-2 py-1 ml-2 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500 tooltip' data-tip="Search" onClick={handleSearchSubmit}><FiSearch size={30} /></button>
+        <button className='px-2 py-1 ml-2 text-lg font-semibold text-white rounded-md shadow-lg bg-violet-500 tooltip' data-tip="Random Post" onClick={goToRandomPost}><GiPerspectiveDiceSixFacesRandom size={30} /></button>
       </div>
       {handleSearchSubmit()}
     </div>

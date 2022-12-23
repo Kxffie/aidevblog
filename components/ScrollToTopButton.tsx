@@ -26,13 +26,13 @@ const ScrollToTopButton = () => {
 
 	return showButton ? (
 		<div className='sticky inset-x-0 bottom-0 flex justify-center w-full pb-3 transition'>
-			<button className='absolute px-2 py-1 text-lg font-semibold text-white transition-opacity duration-500 ease-in-out origin-bottom rounded-md shadow-lg opacity-100 bottom-3 bg-violet-500 animate-bounce' onClick={handleClick}>
+			<button className='absolute px-2 py-1 text-lg font-semibold text-white transition-opacity duration-500 ease-in-out origin-bottom rounded-md shadow-lg opacity-100 bottom-3 bg-violet-500 animate-bounce tooltip' data-tip="Scroll To Top" onClick={handleClick}>
 				<ArrowUp size={36} />
 			</button>
 		</div>
 	) : (
 		<div className='sticky inset-x-0 bottom-0 flex justify-center w-full pb-3 transition'>
-			<button className='absolute px-2 py-1 text-lg font-semibold text-white transition-opacity duration-500 ease-in-out origin-bottom rounded-md shadow-lg opacity-0 bottom-3 bg-violet-500 animate-bounce' onClick={handleClick}>
+			<button className='absolute px-2 py-1 text-lg font-semibold text-white transition-opacity duration-500 ease-in-out origin-bottom rounded-md shadow-lg opacity-0 bottom-3 bg-violet-500 animate-bounce tooltip' data-tip="Scroll To Top" onClick={handleClick}>
 				<ArrowUp size={36} />
 			</button>
 		</div>

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Info } from 'akar-icons';
 
 const Header = () => (
 	<div className='py-3 bg-violet-500 '>
@@ -14,6 +13,9 @@ const Header = () => (
 			{/* <Link legacyBehavior href="/about" >
 				<a className="pr-3 text-lg font-bold tracking-tight text-white transition duration-150 ease-in-out hover:underline">About</a>
 			</Link> */}
+			{/* <div className="flex items-center">
+				<Link href="/login" className='text-white'>Sign In</Link>
+			</div> */}
 		</header>
 	</div>
 );

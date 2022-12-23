@@ -15,6 +15,7 @@ const Post = (props) => {
 				<meta content={props.post.data.desc} property="og:description" />
 				<meta content={props.post.slug} property="og:url" />
 				<meta content="https://aidevblog.vercel.app/favicon.jpg" property="og:image" />
+				<meta name="twitter:card" content="https://aidevblog.vercel.app/favicon.jpg"></meta>
 				<meta content="#8B5CF6" data-react-helmet="true" name="theme-color" />
 			</Head>
 			<GoBackButton />
