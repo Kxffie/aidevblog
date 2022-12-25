@@ -6,10 +6,12 @@ import Head from 'next/head';
 import GoBackButton from '../components/GoBack';
 
 const Post = (props) => {
+	const title = `AIDevBlog - ${props.post.data.title}`;
+
 	return (
 		<div className="max-w-3xl py-4 mx-auto font-bold prose text-gray-800 prose-slate">
 			<Head>
-				<title>AIDevBlog - {props.post.data.title}</title>
+				<title>{title}</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 				<meta content={props.post.data.title} property="og:title" />
 				<meta content={props.post.data.desc} property="og:description" />
@@ -29,6 +31,7 @@ const Post = (props) => {
 					))}
 				</p>
 			</div>
+
 			<div className="text-gray-700" dangerouslySetInnerHTML={{ __html: marked(props.post.content) }} />
 		</div>
 	);
