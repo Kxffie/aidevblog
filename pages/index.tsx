@@ -132,7 +132,7 @@ const Index = (props) => {
 
 import axios from 'axios';
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // Fetch the list of files in the repository
   const { data: files } = await axios.get(
     'https://api.github.com/repos/Kxffie/markdown_storage/contents'
