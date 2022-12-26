@@ -129,40 +129,58 @@ const Index = (props) => {
   );
 };
 
+
+import axios from 'axios';
+
 export async function getStaticProps() {
-  const postsDirectory = path.join(process.cwd(), 'posts/blogs');
-  const newsDirectory = path.join(process.cwd(), 'posts/blogs');
-  const filenames = fs.readdirSync(postsDirectory);
-  const filenamesNews = fs.readdirSync(newsDirectory);
+  // Fetch the list of files in the repository
+  const { data: files } = await axios.get(
+    'https://api.github.com/repos/Kxffie/markdown_storage/contents'
+  );
 
-  const news = filenamesNews.map((filename) => {
-    const filePath = path.join(newsDirectory, filename);
-    const fileContent = fs.readFileSync(filePath, 'utf8');
+  // Map the file objects to an array of post objects
+  const postPromises = files.map(async ({ name, sha, download_url }) => {
+    // Fetch the contents of the file
+    const { data: fileContent } = await axios.get(download_url);
+    // Parse the front matter and content from the file contents
     const { data, content } = matter(fileContent);
     return {
-      slug: filename.replace('.md', ''),
+      slug: name.replace('.md', ''),
       data,
       content,
     };
   });
 
-  const posts = filenames.map((filename) => {
-    const filePath = path.join(postsDirectory, filename);
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const { data, content } = matter(fileContent);
-    return {
-      slug: filename.replace('.md', ''),
-      data,
-      content,
-    };
-  });
+  // Wait for all the promises to resolve and get the results
+  const posts = await Promise.all(postPromises);
 
   return {
     props: {
       posts,
-      news,
     },
   };
 }
+
+// export async function getStaticProps() {
+//   const postsDirectory = path.join(process.cwd(), 'posts/blogs');
+//   const filenames = fs.readdirSync(postsDirectory);
+
+//   const posts = filenames.map((filename) => {
+//     const filePath = path.join(postsDirectory, filename);
+//     const fileContent = fs.readFileSync(filePath, 'utf8');
+//     const { data, content } = matter(fileContent);
+//     return {
+//       slug: filename.replace('.md', ''),
+//       data,
+//       content,
+//     };
+//   });
+
+//   return {
+//     props: {
+//       posts,
+//     },
+//   };
+// }
 
 export default Index;

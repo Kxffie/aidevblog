@@ -37,14 +37,18 @@ const Post = (props) => {
 	);
 };
 
+import axios from 'axios';
+
 export async function getStaticPaths() {
-	const postsDirectory = path.join(process.cwd(), 'posts/blogs');
-	const filenames = fs.readdirSync(postsDirectory);
+	// Fetch the list of files in the repository
+	const { data: files } = await axios.get(
+		'https://api.github.com/repos/Kxffie/markdown_storage/contents'
+	);
 
 	return {
-		paths: filenames.map((filename) => ({
+		paths: files.map(({ name }) => ({
 			params: {
-				slug: filename.replace('.md', ''),
+				slug: name.replace('.md', ''),
 			},
 		})),
 		fallback: false,
@@ -52,9 +56,18 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const postsDirectory = path.join(process.cwd(), 'posts/blogs');
-	const filePath = path.join(postsDirectory, `${params.slug}.md`);
-	const fileContent = fs.readFileSync(filePath, 'utf8');
+	// Find the file object for the specified slug
+	const { data: files } = await axios.get(
+		'https://api.github.com/repos/Kxffie/markdown_storage/contents'
+	);
+	const file = files.find(({ name }) => name === `${params.slug}.md`);
+	if (!file) {
+		return { props: {} };
+	}
+
+	// Fetch the contents of the file
+	const { data: fileContent } = await axios.get(file.download_url);
+	// Parse the front matter and content from the file contents
 	const { data, content } = matter(fileContent);
 
 	return {
@@ -66,5 +79,35 @@ export async function getStaticProps({ params }) {
 		},
 	};
 }
+
+// export async function getStaticPaths() {
+// 	const postsDirectory = path.join(process.cwd(), 'posts/blogs');
+// 	const filenames = fs.readdirSync(postsDirectory);
+
+// 	return {
+// 		paths: filenames.map((filename) => ({
+// 			params: {
+// 				slug: filename.replace('.md', ''),
+// 			},
+// 		})),
+// 		fallback: false,
+// 	};
+// }
+
+// export async function getStaticProps({ params }) {
+// 	const postsDirectory = path.join(process.cwd(), 'posts/blogs');
+// 	const filePath = path.join(postsDirectory, `${params.slug}.md`);
+// 	const fileContent = fs.readFileSync(filePath, 'utf8');
+// 	const { data, content } = matter(fileContent);
+
+// 	return {
+// 		props: {
+// 			post: {
+// 				data,
+// 				content,
+// 			},
+// 		},
+// 	};
+// }
 
 export default Post;
