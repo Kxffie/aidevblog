@@ -55,7 +55,7 @@ export async function getStaticPaths() {
 	};
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
 	// Find the file object for the specified slug
 	const { data: files } = await axios.get(
 		'https://api.github.com/repos/Kxffie/markdown_storage/contents'
