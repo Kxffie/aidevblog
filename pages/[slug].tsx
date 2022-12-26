@@ -80,6 +80,10 @@ export async function getStaticProps({ params }) {
 	};
 }
 
+//
+// LOCAL FILE VERSION
+//
+
 // export async function getStaticPaths() {
 // 	const postsDirectory = path.join(process.cwd(), 'posts/blogs');
 // 	const filenames = fs.readdirSync(postsDirectory);

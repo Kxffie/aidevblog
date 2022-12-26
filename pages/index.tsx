@@ -67,7 +67,7 @@ const Index = (props) => {
           <div key={post.slug} className="text-black" >
             <div className="container max-w-3xl px-10 py-6 mx-auto mb-3 bg-white rounded-lg shadow-xl ">
               <div className="flex items-center justify-between ">
-                <span className="text-sm text-gray-400">{post.data.date} • {post.data.readTime}</span>
+                <span key={post.slug} className="text-sm text-gray-400">{post.data.date} • {post.data.readTime}</span>
                 <span className="px-2 py-1 font-bold rounded">
                   {post.data.tags.map((tag) => (
                     <div key={post.slug.tag} className="hidden px-2 py-1 ml-1 text-sm font-semibold text-white rounded-md shadow-lg md:inline-block bg-violet-500">{tag}</div>
@@ -160,6 +160,10 @@ export async function getStaticProps() {
     },
   };
 }
+
+//
+// LOCAL FILE VERSION
+//
 
 // export async function getStaticProps() {
 //   const postsDirectory = path.join(process.cwd(), 'posts/blogs');
