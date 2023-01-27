@@ -4,7 +4,6 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Head from 'next/head';
 import ScrollToTopButton from '../components/ScrollToTopButton';
-import { SessionProvider } from 'next-auth/react'
 
 const Layout = ({ children }) => (
   <div className='flex flex-col justify-between h-screen'>
@@ -14,18 +13,16 @@ const Layout = ({ children }) => (
   </div>
 )
 
-function MyApp({ Component, pageProps, session }) {
+function MyApp({ Component, pageProps }) {
   return (
-    <SessionProvider session={session}>
-      <Layout>
-        <Head>
-          <title>AIDevBlog</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
-        <Component {...pageProps} />
-        <ScrollToTopButton />
-      </Layout>
-    </SessionProvider>
+    <Layout>
+      <Head>
+        <title>AIDevBlog</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Component {...pageProps} />
+      <ScrollToTopButton />
+    </Layout>
   )
 }
 
